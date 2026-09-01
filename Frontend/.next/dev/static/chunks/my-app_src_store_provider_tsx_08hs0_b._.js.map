@@ -1,0 +1,6 @@
+{
+  "version": 3,
+  "sources": [],
+  "sections": [
+    {"offset": {"line": 4, "column": 0}, "map": {"version":3,"sources":["file:///C:/Users/USER/Documents/Fullstack/Frontend/my-app/src/store/provider.tsx"],"sourcesContent":["\"use client\";\r\n\r\nimport { Provider } from \"react-redux\";\r\nimport { store } from \"@/src/store/\";\r\n\r\nexport default function StoreProvider({\r\n  children,\r\n}: {\r\n  children: React.ReactNode;\r\n}) {\r\n  return <Provider store={store}>{children}</Provider>;\r\n}"],"names":["StoreProvider","children","store"],"mappings":";;;;;AAEA;;;;;;AAFA;;;;AAKe,SAASA,cAAc,EACpCC,QAAQ,EAGT;IACC,qBAAO,0MAAC,wKAAQ;QAACC,OAAOA;kBAAQD;;;;;;AAClC;KANwBD"}}]
+}

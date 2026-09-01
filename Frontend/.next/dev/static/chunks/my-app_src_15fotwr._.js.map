@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": [],
+  "sections": [
+    {"offset": {"line": 4, "column": 0}, "map": {"version":3,"sources":["file:///C:/Users/USER/Documents/Fullstack/Frontend/my-app/src/provider.tsx"],"sourcesContent":["\"use client\";\r\n\r\nimport { Provider } from \"react-redux\";\r\nimport { store } from \"@/src/store/store\";\r\nimport type { ReactNode } from \"react\";\r\n\r\ninterface StoreProviderProps {\r\n  children: ReactNode;\r\n}\r\n\r\nexport default function StoreProvider({\r\n  children,\r\n}: StoreProviderProps) {\r\n  return (\r\n    <Provider store={store}>\r\n      {children}\r\n    </Provider>\r\n  );\r\n}"],"names":["StoreProvider","children","store"],"mappings":";;;;;AAEA;AACA;AAHA;;;;AAUe,SAASA,cAAc,EACpCC,QAAQ,EACW;IACnB,qBACE,0MAAC,wKAAQ;QAACC,OAAO,8IAAK;kBACnBD;;;;;;AAGP;KARwBD"}},
+    {"offset": {"line": 34, "column": 0}, "map": {"version":3,"sources":[],"names":[],"mappings":""}}]
+}

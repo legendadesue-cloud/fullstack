@@ -1,0 +1,515 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "ARMSLENGTH Volunteer Platform API",
+    "description": "API documentation for the ARMSLENGTH Volunteer Platform",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:4000",
+      "description": "Local development server"
+    }
+  ],
+  "tags": [
+    {
+      "name": "General",
+      "description": "General platform endpoints"
+    },
+    {
+      "name": "Profiles",
+      "description": "Volunteer profile endpoints"
+    },
+    {
+      "name": "Events",
+      "description": "Event endpoints"
+    }
+  ],
+  "paths": {
+    "/": {
+      "get": {
+        "tags": ["General"],
+        "summary": "Welcome message",
+        "description": "Returns a welcome message for the ARMSLENGTH Volunteer Platform.",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SuccessMessage"
+                },
+                "example": {
+                  "message": "Welcome to the ArmsLength Volunteer Platform"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+
+    "/volunteer": {
+      "get": {
+        "tags": ["General"],
+        "summary": "Volunteer opportunities page",
+        "description": "Returns a message for the volunteer opportunities page.",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "Volunteer Opportunities Page"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+
+    "/organizations": {
+      "get": {
+        "tags": ["General"],
+        "summary": "Organizations page",
+        "description": "Returns a message for the organizations page.",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "Organizations Page"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+
+    "/events": {
+      "options": {
+        "tags": ["Events"],
+        "summary": "Events options request",
+        "description": "Returns a response indicating that events were updated successfully.",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "example": {
+                  "success": true,
+                  "message": "Events updated successfully"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+
+    "/profile": {
+      "post": {
+        "tags": ["Profiles"],
+        "summary": "Create a volunteer profile",
+        "description": "Creates a new volunteer profile and stores it in PostgreSQL.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProfileInput"
+              },
+              "example": {
+                "FullName": "John Doe",
+                "PhoneNumber": "08012345678",
+                "Email": "john@example.com",
+                "DateOfBirth": "2005-06-15",
+                "Location": "Lagos",
+                "Skills": "Web Development, Communication",
+                "Institution": "University of Lagos",
+                "Qualification": "BSc",
+                "FieldOfStudy": "Software Engineering",
+                "GraduationYear": 2028,
+                "VolunteerOrWorkExperience": "Volunteer at a community organization",
+                "AreaOfInterest": "Technology and Education",
+                "CVResume": "john-doe-cv.pdf"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Profile created successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProfileResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Database or server error"
+          }
+        }
+      },
+
+      "get": {
+        "tags": ["Profiles"],
+        "summary": "Get all profiles",
+        "description": "Retrieves all volunteer profiles from the database, ordered by ID descending.",
+        "responses": {
+          "200": {
+            "description": "Profiles retrieved successfully",
+            "content": {
+              "application/json": {
+                "example": {
+                  "success": true,
+                  "profiles": [
+                    {
+                      "id": "550e8400-e29b-41d4-a716-446655440000",
+                      "fullname": "John Doe",
+                      "phonenumber": "08012345678",
+                      "email": "john@example.com",
+                      "dateofbirth": "2005-06-15",
+                      "location": "Lagos",
+                      "skills": "Web Development",
+                      "institution": "University of Lagos",
+                      "qualification": "BSc",
+                      "fieldofstudy": "Software Engineering",
+                      "graduationyear": 2028,
+                      "volunteerorworkexperience": "Community volunteer",
+                      "areaofinterest": "Technology",
+                      "cvresume": "john-doe-cv.pdf"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Database or server error"
+          }
+        }
+      }
+    },
+
+    "/profile/{id}": {
+      "get": {
+        "tags": ["Profiles"],
+        "summary": "Get a profile by ID",
+        "description": "Retrieves a single volunteer profile using its ID.",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/ProfileId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Profile retrieved successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProfileResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Profile not found",
+            "content": {
+              "application/json": {
+                "example": {
+                  "success": false,
+                  "message": "Profile not found"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Database or server error"
+          }
+        }
+      },
+
+      "put": {
+        "tags": ["Profiles"],
+        "summary": "Update a profile",
+        "description": "Completely updates a volunteer profile using its ID.",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/ProfileId"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProfileInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Profile updated successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProfileResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Profile not found"
+          },
+          "500": {
+            "description": "Database or server error"
+          }
+        }
+      },
+
+      "patch": {
+        "tags": ["Profiles"],
+        "summary": "Partially update a profile",
+        "description": "Updates profile information using the PATCH method.",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/ProfileId"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProfileInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Profile updated successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProfileResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Profile not found"
+          },
+          "500": {
+            "description": "Database or server error"
+          }
+        }
+      },
+
+      "delete": {
+        "tags": ["Profiles"],
+        "summary": "Delete a profile",
+        "description": "Deletes a volunteer profile using its ID.",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/ProfileId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Profile deleted successfully",
+            "content": {
+              "application/json": {
+                "example": {
+                  "success": true,
+                  "message": "Profile deleted successfully"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Profile not found"
+          },
+          "500": {
+            "description": "Database or server error"
+          }
+        }
+      }
+    }
+  },
+
+  "components": {
+    "parameters": {
+      "ProfileId": {
+        "name": "id",
+        "in": "path",
+        "required": true,
+        "description": "The ID of the volunteer profile",
+       "schema": {
+  "type": "string",
+  "format": "uuid",
+  "example": "550e8400-e29b-41d4-a716-446655440000"
+        }
+      }
+    },
+
+    "schemas": {
+      "ProfileInput": {
+        "type": "object",
+        "properties": {
+          "FullName": {
+            "type": "string",
+            "example": "John Doe"
+          },
+          "PhoneNumber": {
+            "type": "string",
+            "example": "08012345678"
+          },
+          "Email": {
+            "type": "string",
+            "format": "email",
+            "example": "john@example.com"
+          },
+          "DateOfBirth": {
+            "type": "string",
+            "format": "date",
+            "example": "2005-06-15"
+          },
+          "Location": {
+            "type": "string",
+            "example": "Lagos"
+          },
+          "Skills": {
+            "type": "string",
+            "example": "Web Development, Communication"
+          },
+          "Institution": {
+            "type": "string",
+            "example": "University of Lagos"
+          },
+          "Qualification": {
+            "type": "string",
+            "example": "BSc"
+          },
+          "FieldOfStudy": {
+            "type": "string",
+            "example": "Software Engineering"
+          },
+          "GraduationYear": {
+            "type": "integer",
+            "example": 2028
+          },
+          "VolunteerOrWorkExperience": {
+            "type": "string",
+            "example": "Community volunteer"
+          },
+          "AreaOfInterest": {
+            "type": "string",
+            "example": "Technology and Education"
+          },
+          "CVResume": {
+            "type": "string",
+            "example": "john-doe-cv.pdf"
+          }
+        }
+      },
+
+      "ProfileResponse": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "example": true
+          },
+          "message": {
+            "type": "string",
+            "example": "Profile created successfully"
+          },
+          "profile": {
+            "$ref": "#/components/schemas/Profile"
+          }
+        }
+      },
+
+      "Profile": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "example": "550e8400-e29b-41d4-a716-446655440000"
+          },
+          "fullname": {
+            "type": "string",
+            "example": "John Doe"
+          },
+          "phonenumber": {
+            "type": "string",
+            "example": "08012345678"
+          },
+          "email": {
+            "type": "string",
+            "format": "email",
+            "example": "john@example.com"
+          },
+          "dateofbirth": {
+            "type": "string",
+            "example": "2005-06-15"
+          },
+          "location": {
+            "type": "string",
+            "example": "Lagos"
+          },
+          "skills": {
+            "type": "string",
+            "example": "Web Development"
+          },
+          "institution": {
+            "type": "string",
+            "example": "University of Lagos"
+          },
+          "qualification": {
+            "type": "string",
+            "example": "BSc"
+          },
+          "fieldofstudy": {
+            "type": "string",
+            "example": "Software Engineering"
+          },
+          "graduationyear": {
+            "type": "integer",
+            "example": 2028
+          },
+          "volunteerorworkexperience": {
+            "type": "string",
+            "example": "Community volunteer"
+          },
+          "areaofinterest": {
+            "type": "string",
+            "example": "Technology"
+          },
+          "cvresume": {
+            "type": "string",
+            "example": "john-doe-cv.pdf"
+          }
+        }
+      },
+
+      "SuccessMessage": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}
