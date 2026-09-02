@@ -8,7 +8,7 @@ const redoc = require("redoc-express");
 require("dotenv").config();
 
 const app = express();
-const PORT = 4000;
+const PORT = process.env.PORT || 4000;
 
 app.use(cors());
 app.use(express.json());
@@ -40,13 +40,11 @@ app.get("/database", async (req, res) => {
   }
 });
 
-
 const pool = new Pool({
-  host: "localhost",
-  user: "postgres",
-  password: process.env.DB_PASSWORD,
-  port: 5432,
-  database: "postgres",
+  connectionString: process.env.DATABASE_URL,
+  ssl: {
+    rejectUnauthorized: false,
+  },
 });
 
 pool
