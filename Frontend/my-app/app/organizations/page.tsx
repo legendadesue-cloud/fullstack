@@ -1,238 +1,269 @@
 "use client";
-import { useEffect } from "react";
+
 import Footer from "@/components/footer";
 import Header from "@/components/header";
-import Link from "next/link";     
+import Link from "next/link";
 import ImageCard from "@/components/imageCard";
+
 export default function Home() {
- 
-  useEffect(() => {
-        fetch("http://localhost:4000/events")
-          .then((res) => res.json())
-          .then((data) => {
-            console.log(data);
-          });
-      }, []);
+  const organizations = [
+    {
+      name: "Red Cross Nigeria",
+      category: "Healthcare",
+      image: "/images/COMMUNITY EME.jpg",
+      alt: "Red Cross Nigeria",
+      description:
+        "Dedicated to disaster response, emergency healthcare, blood donation campaigns, and humanitarian relief.",
+      location: "Abuja",
+      volunteers: "2,400+",
+      events: "18 Active",
+      link: "/organizations/red-cross",
+    },
+    {
+      name: "Teach Africa",
+      category: "Education",
+      image: "/images/Education for All.jpg",
+      alt: "Teach Africa",
+      description:
+        "Providing quality education, literacy programs, and digital learning opportunities for children.",
+      location: "Jos",
+      volunteers: "1,150+",
+      events: "12 Active",
+      link: "/organizations/teach-africa",
+    },
+    {
+      name: "Save Lives Initiative",
+      category: "Humanitarian Aid",
+      image: "/images/save Africans lives.jpg",
+      alt: "Save Lives Initiative",
+      description:
+        "Fighting hunger through food distribution, emergency relief, and community development.",
+      location: "Makurdi",
+      volunteers: "890+",
+      events: "9 Active",
+      link: "/organizations/save-lives",
+    },
+    {
+      name: "Health First",
+      category: "Healthcare",
+      image:
+        "/images/This past Saturday, we had the honour of joining….jpg",
+      alt: "Health First",
+      description:
+        "Improving community health through outreach, vaccinations, and medical volunteer programs.",
+      location: "Lagos",
+      volunteers: "1,700+",
+      events: "15 Active",
+      link: "/organizations/health-first",
+    },
+    {
+      name: "Green Earth",
+      category: "Environment",
+      image: "/images/COMMUNITY EME.jpg",
+      alt: "Green Earth",
+      description:
+        "Promoting environmental sustainability through clean-up projects and tree-planting campaigns.",
+      location: "Enugu",
+      volunteers: "980+",
+      events: "11 Active",
+      link: "/organizations/green-earth",
+    },
+    {
+      name: "Future Leaders",
+      category: "Youth Development",
+      image: "/images/Education for All.jpg",
+      alt: "Future Leaders",
+      description:
+        "Empowering young people through leadership, mentorship, and career development programs.",
+      location: "Ibadan",
+      volunteers: "760+",
+      events: "8 Active",
+      link: "/organizations/future-leaders",
+    },
+  ];
 
   return (
     <>
-      <Header/>
- 
-    <section className="organizations-section">
+      <Header />
 
-  <div className="organizations-header">
-    <h1>Partner Organizations</h1>
-    <p>
-      Discover trusted NGOs and nonprofit organizations making a difference
-      across communities. Explore their missions, current volunteer
-      opportunities, and upcoming events.
-    </p>
-  </div>
+      <main className="organizations-page">
 
-  <div className="organization-search">
-    <input
-      type="text"
-      placeholder="Search organizations..."
-      className="search-box"
-    />
+        {/* =========================================
+            HERO
+        ========================================= */}
+        <section className="organizations-hero">
+          <div className="organizations-hero-content">
+            <span className="organizations-label">
+              ARMSLENGTH NETWORK
+            </span>
 
-    <select className="filter-box">
-      <option>All Categories</option>
-      <option>Healthcare</option>
-      <option>Education</option>
-      <option>Environment</option>
-      <option>Humanitarian Aid</option>
-      <option>Youth Development</option>
-      <option>Emergency Response</option>
-    </select>
-  </div>
+            <h1>Partner Organizations</h1>
 
-  <div className="organization-grid">
+            <p>
+              Connect with trusted NGOs and nonprofit organizations
+              creating meaningful change across communities. Discover
+              their missions, volunteer opportunities, and upcoming
+              events.
+            </p>
 
-    <div className="organization-card">
-      <ImageCard
-        src="/images/COMMUNITY EME.jpg"
-        alt="Red Cross Nigeria"
-      />
+            <div className="organizations-hero-stats">
+              <div>
+                <strong>6+</strong>
+                <span>Organizations</span>
+              </div>
 
-      <div className="organization-content">
-        <h2>Red Cross Nigeria</h2>
+              <div>
+                <strong>7K+</strong>
+                <span>Volunteers</span>
+              </div>
 
-        <span className="organization-category">
-          Healthcare
-        </span>
+              <div>
+                <strong>70+</strong>
+                <span>Active Events</span>
+              </div>
+            </div>
+          </div>
 
-        <p>
-          Dedicated to disaster response, emergency healthcare,
-          blood donation campaigns, and humanitarian relief.
-        </p>
+          <div className="organization-status">
+            <span className="status-dot"></span>
+            Organizations Active
+          </div>
+        </section>
 
-        <div className="organization-info">
-          <p><strong>Location:</strong> Abuja</p>
-          <p><strong>Volunteers:</strong> 2,400+</p>
-          <p><strong>Events:</strong> 18 Active</p>
-        </div>
+        {/* =========================================
+            ORGANIZATION DIRECTORY
+        ========================================= */}
+        <section className="organizations-section">
 
-        <Link href="/organizations/red-cross">
-          <button>View Organization</button>
-        </Link>
-      </div>
-    </div>
+          <div className="organizations-section-title">
+            <span>ORGANIZATION DIRECTORY</span>
 
-    <div className="organization-card">
-      <ImageCard
-        src="/images/Education for All.jpg"
-        alt="Teach Africa"
-      />
+            <h2>Find an Organization</h2>
 
-      <div className="organization-content">
-        <h2>Teach Africa</h2>
+            <p>
+              Explore organizations based on their area of impact and
+              discover opportunities that match your interests.
+            </p>
+          </div>
 
-        <span className="organization-category">
-          Education
-        </span>
+          {/* SEARCH + FILTER */}
+          <div className="organization-search">
 
-        <p>
-          Providing quality education, literacy programs,
-          and digital learning opportunities for children.
-        </p>
+            <div className="search-wrapper">
+              <span className="search-icon">⌕</span>
 
-        <div className="organization-info">
-          <p><strong>Location:</strong> Jos</p>
-          <p><strong>Volunteers:</strong> 1,150+</p>
-          <p><strong>Events:</strong> 12 Active</p>
-        </div>
+              <input
+                type="text"
+                placeholder="Search organizations..."
+                className="search-box"
+              />
+            </div>
 
-        <Link href="/organizations/teach-africa">
-          <button>View Organization</button>
-        </Link>
-      </div>
-    </div>
+            <select className="filter-box">
+              <option>All Categories</option>
+              <option>Healthcare</option>
+              <option>Education</option>
+              <option>Environment</option>
+              <option>Humanitarian Aid</option>
+              <option>Youth Development</option>
+              <option>Emergency Response</option>
+            </select>
 
-    <div className="organization-card">
-      <ImageCard
-        src="/images/save Africans lives.jpg"
-        alt="Save Lives Initiative"
-      />
+          </div>
 
-      <div className="organization-content">
-        <h2>Save Lives Initiative</h2>
+          {/* ORGANIZATION CARDS */}
+          <div className="organization-grid">
 
-        <span className="organization-category">
-          Humanitarian Aid
-        </span>
+            {organizations.map((organization) => (
+              <article
+                className="organization-card"
+                key={organization.name}
+              >
+                <div className="organization-image">
+                  <ImageCard
+                    src={organization.image}
+                    alt={organization.alt}
+                  />
 
-        <p>
-          Fighting hunger through food distribution,
-          emergency relief, and community development.
-        </p>
+                  <span className="organization-category">
+                    {organization.category}
+                  </span>
+                </div>
 
-        <div className="organization-info">
-          <p><strong>Location:</strong> Makurdi</p>
-          <p><strong>Volunteers:</strong> 890+</p>
-          <p><strong>Events:</strong> 9 Active</p>
-        </div>
+                <div className="organization-content">
 
-        <Link href="/organizations/save-lives">
-          <button>View Organization</button>
-        </Link>
-      </div>
-    </div>
+                  <h2>{organization.name}</h2>
 
-    <div className="organization-card">
-      <ImageCard
-        src="/images/This past Saturday, we had the honour of joining….jpg"
-        alt="Health First"
-      />
+                  <p className="organization-description">
+                    {organization.description}
+                  </p>
 
-      <div className="organization-content">
-        <h2>Health First</h2>
+                  <div className="organization-info">
 
-        <span className="organization-category">
-          Healthcare
-        </span>
+                    <div>
+                      <span>Location</span>
+                      <strong>{organization.location}</strong>
+                    </div>
 
-        <p>
-          Improving community health through outreach,
-          vaccinations, and medical volunteer programs.
-        </p>
+                    <div>
+                      <span>Volunteers</span>
+                      <strong>{organization.volunteers}</strong>
+                    </div>
 
-        <div className="organization-info">
-          <p><strong>Location:</strong> Lagos</p>
-          <p><strong>Volunteers:</strong> 1,700+</p>
-          <p><strong>Events:</strong> 15 Active</p>
-        </div>
+                    <div>
+                      <span>Events</span>
+                      <strong>{organization.events}</strong>
+                    </div>
 
-        <Link href="/organizations/health-first">
-          <button>View Organization</button>
-        </Link>
-      </div>
-    </div>
+                  </div>
 
-    <div className="organization-card">
-      <ImageCard
-        src="/images/COMMUNITY EME.jpg"
-        alt="Green Earth"
-      />
+                  <Link
+                    href={organization.link}
+                    className="organization-btn"
+                  >
+                    View Organization
+                    <span>→</span>
+                  </Link>
 
-      <div className="organization-content">
-        <h2>Green Earth</h2>
+                </div>
+              </article>
+            ))}
 
-        <span className="organization-category">
-          Environment
-        </span>
+          </div>
 
-        <p>
-          Promoting environmental sustainability through
-          clean-up projects and tree-planting campaigns.
-        </p>
+        </section>
 
-        <div className="organization-info">
-          <p><strong>Location:</strong> Enugu</p>
-          <p><strong>Volunteers:</strong> 980+</p>
-          <p><strong>Events:</strong> 11 Active</p>
-        </div>
+        {/* =========================================
+            CTA
+        ========================================= */}
+        <section className="organizations-cta">
 
-        <Link href="/organizations/green-earth">
-          <button>View Organization</button>
-        </Link>
-      </div>
-    </div>
+          <div>
+            <span>MAKE A DIFFERENCE</span>
 
-    <div className="organization-card">
-      <ImageCard
-        src="/images/Education for All.jpg"
-        alt="Future Leaders"
-      />
+            <h2>
+              Find an Organization That Matches Your Purpose.
+            </h2>
 
-      <div className="organization-content">
-        <h2>Future Leaders</h2>
+            <p>
+              Explore different causes, discover meaningful
+              opportunities, and use your skills to contribute
+              to organizations making an impact.
+            </p>
 
-        <span className="organization-category">
-          Youth Development
-        </span>
+            <Link
+              href="/"
+              className="organizations-cta-btn"
+            >
+              Explore Opportunities
+            </Link>
+          </div>
 
-        <p>
-          Empowering young people through leadership,
-          mentorship, and career development programs.
-        </p>
+        </section>
 
-        <div className="organization-info">
-          <p><strong>Location:</strong> Ibadan</p>
-          <p><strong>Volunteers:</strong> 760+</p>
-          <p><strong>Events:</strong> 8 Active</p>
-        </div>
+      </main>
 
-        <Link href="/organizations/future-leaders">
-          <button>View Organization</button>
-        </Link>
-      </div>
-    </div>
-
-  </div>
-
-  </section>
-      <Footer/>
+      <Footer />
     </>
   );
 }
