@@ -307,7 +307,7 @@ app.post("/send-otp", async (req, res) => {
     console.log("OTP generated for:", email);
 
     const { data, error } = await resend.emails.send({
-      from: `ARMSLENGTH <${process.env.RESEND_FROM_EMAIL}>`,
+      from: "ARMSLENGTH <noreply@armslength.com.ng>",
       to: [email],
       subject: "ARMSLENGTH Login OTP",
 
@@ -326,14 +326,14 @@ ARMSLENGTH
       `,
 
       html: `
-        <div style="font-family: Arial, sans-serif;">
+        <div style="font-family: Arial, sans-serif; max-width: 600px; margin: auto; padding: 30px;">
           <h2>ARMSLENGTH Login</h2>
 
           <p>Hello ${user.FullName},</p>
 
-          <p>Your login OTP is:</p>
+          <p>Your ARMSLENGTH login OTP is:</p>
 
-          <h1 style="letter-spacing: 8px;">
+          <h1 style="letter-spacing: 8px; font-size: 32px;">
             ${OTP}
           </h1>
 
@@ -378,6 +378,7 @@ ARMSLENGTH
     });
   }
 });
+
 
 // ========================================
 // VERIFY OTP
@@ -428,14 +429,12 @@ app.post("/verify-otp", async (req, res) => {
       });
     }
 
-    // OTP is correct
     const result = await pool.query(
       `
       SELECT
         id,
         "FullName" AS fullName,
         "Email" AS email,
-        password_hash,
         skills,
         "Institution" AS institution,
         qualification,
@@ -468,7 +467,7 @@ app.post("/verify-otp", async (req, res) => {
 
       user: {
         id: user.id,
-        FullName: user.fullName,
+        FullName: user.fullname,
         Email: user.email,
         Skills: user.skills,
         Institution: user.institution,
@@ -479,7 +478,6 @@ app.post("/verify-otp", async (req, res) => {
         AreaOfInterest: user.area_of_interest,
       },
     });
-
   } catch (error) {
     console.error("VERIFY OTP ERROR:", error);
 
@@ -489,8 +487,7 @@ app.post("/verify-otp", async (req, res) => {
       details: error.message,
     });
   }
-});
-// ========================================
+});// ========================================
 // GET ALL EVENTS
 // ========================================
 
@@ -900,6 +897,76 @@ app.delete("/api/events/:id", async (req, res) => {
   }
 });
 
+app.post("/api/events/:id/register", async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    const eventResult = await pool.query(
+      `SELECT id, name, capacity, volunteers, registration_deadline, status
+       FROM events
+       WHERE id = $1`,
+      [id]
+    );
+
+    if (eventResult.rows.length === 0) {
+      return res.status(404).json({
+        success: false,
+        error: "Event not found",
+      });
+    }
+
+    const event = eventResult.rows[0];
+
+    if (event.status !== "Approved") {
+      return res.status(400).json({
+        success: false,
+        error: "This event is not open for registration",
+      });
+    }
+
+    if (
+      event.registration_deadline &&
+      new Date(event.registration_deadline) < new Date()
+    ) {
+      return res.status(400).json({
+        success: false,
+        error: "Registration deadline has passed",
+      });
+    }
+
+    if (
+      event.capacity !== null &&
+      event.volunteers >= event.capacity
+    ) {
+      return res.status(400).json({
+        success: false,
+        error: "This event is full",
+      });
+    }
+
+    const updatedEvent = await pool.query(
+      `UPDATE events
+       SET volunteers = COALESCE(volunteers, 0) + 1
+       WHERE id = $1
+       RETURNING id, name, capacity, volunteers`,
+      [id]
+    );
+
+    res.json({
+      success: true,
+      message: "Successfully registered for the event",
+      event: updatedEvent.rows[0],
+    });
+  } catch (error) {
+    console.error("Registration error:", error);
+
+    res.status(500).json({
+      success: false,
+      error: "Failed to register for event",
+      details: error.message,
+    });
+  }
+});
 // ========================================
 // CREATE PROFILE
 // ========================================

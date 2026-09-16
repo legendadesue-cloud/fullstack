@@ -371,7 +371,7 @@ header .search-box{
 
 .dashboard-overview h3 {
   font-size: 25px;
-  margin: 0 0 15px;
+  margin: 0 0 15px; 
 }
 
 .dashboard-overview p {
@@ -7569,5 +7569,68 @@ MOBILE BUTTONS
 
   .events-grid {
     grid-template-columns: 1fr;
+  }
+}
+
+.login-section {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f4f8f6;
+  padding: 20px;
+}
+
+.login-dashboard {
+  width: 100%;
+  max-width: 450px;
+  padding: 50px 40px;
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  text-align: center;
+}
+
+.login-dashboard h1 {
+  margin-bottom: 35px;
+  color: #0c8b55;
+  font-size: 32px;
+  font-weight: 800;
+  letter-spacing: 1px;
+}
+
+.login-button {
+  display: block;
+  width: 100%;
+  padding: 15px 20px;
+  margin-top: 18px;
+  border-radius: 8px;
+  background: #0c8b55;
+  color: white;
+  text-decoration: none;
+  font-size: 16px;
+  font-weight: 600;
+  text-align: center;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.2s ease;
+  box-sizing: border-box;
+}
+
+.login-button:hover {
+  background: #087147;
+  transform: translateY(-2px);
+}
+
+.login-button:active {
+  transform: translateY(0);
+}
+
+@media (max-width: 500px) {
+  .login-dashboard {
+    padding: 40px 25px;
+  }
+
+  .login-dashboard h1 {
+    font-size: 27px;
   }
 }

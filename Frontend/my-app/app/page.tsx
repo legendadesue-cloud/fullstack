@@ -22,24 +22,18 @@ export default function Home() {
   }, []);
 
   return (
-    <>
-      <section className="login-section">
-        <div className="login-dashboard">
-          <h1>ARMSLENGTH</h1>
+    <section className="login-section">
+      <div className="login-dashboard">
+        <h1>ARMSLENGTH</h1>
 
-          <button type="button" className="login-button">
-            <Link href="/loginvolunteer">
-              Volunteer
-            </Link>
-          </button>
+        <Link href="/loginvolunteer" className="login-button">
+          Volunteer
+        </Link>
 
-          <button type="button" className="login-button">
-            <Link href="/loginadmin">
-              Administrator
-            </Link>
-          </button>
-        </div>
-      </section>
-    </>
+        <Link href="/loginadmin" className="login-button">
+          Administrator
+        </Link>
+      </div>
+    </section>
   );
 }

@@ -72,6 +72,55 @@ export default function EventsPage() {
     });
   };
 
+  const registerForEvent = async (eventId: number) => {
+  try {
+    const storedUser = sessionStorage.getItem("loggedInUser");
+
+    if (!storedUser) {
+      alert("Please log in before registering for an event.");
+      return;
+    }
+
+    const user = JSON.parse(storedUser);
+
+    const response = await fetch(
+      `http://localhost:4000/api/events/${eventId}/register`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          volunteer_id: user.id,
+        }),
+      }
+    );
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      alert(data.error || "Failed to register.");
+      return;
+    }
+
+    alert(data.message);
+
+    setEvents((currentEvents) =>
+      currentEvents.map((event) =>
+        event.id === eventId
+          ? {
+              ...event,
+              volunteers: event.volunteers + 1,
+            }
+          : event
+      )
+    );
+  } catch (error) {
+    console.error(error);
+    alert("Unable to register for this event.");
+  }
+};
+
   return (
     <>
       <Header />
@@ -164,10 +213,9 @@ export default function EventsPage() {
                   <span className={`event-status ${event.status.toLowerCase()}`}>
                     {event.status}
                   </span>
-
-                  <button className="register-button">
-                    Register
-                  </button>
+                  <button className="register-button" onClick={() => registerForEvent(event.id)}>
+                  Register
+                </button>
                 </div>
               </div>
             </article>
