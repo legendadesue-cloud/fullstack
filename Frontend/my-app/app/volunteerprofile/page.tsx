@@ -71,7 +71,7 @@ export default function Profile() {
         );
 
         const response = await fetch(
-          `http://localhost:4000/profile/${loggedInUser.id}`,
+          `${process.env.NEXT_PUBLIC_API_URL}/profile/${loggedInUser.id}`,
           {
             method: "GET",
             headers: {

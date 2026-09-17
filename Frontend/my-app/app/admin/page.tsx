@@ -41,7 +41,7 @@ export default function Home() {
     const checkServer = async () => {
       try {
         const response = await fetch(
-          "http://localhost:4000/"
+          `${process.env.NEXT_PUBLIC_API_URL}/`
         );
 
         const contentType =

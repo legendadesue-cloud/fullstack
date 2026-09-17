@@ -23,23 +23,20 @@ export default function Home() {
       console.log("Sending login request...");
       console.log("Email:", email);
 
-      const response = await fetch(
-        "http://localhost:4000/loginvolunteer",
-        {
-          method: "POST",
-
-          headers: {
-            "Content-Type": "application/json",
-            Accept: "application/json",
-          },
-
-          body: JSON.stringify({
-            Email: email.trim(),
-            Password: password,
-          }),
-        }
-      );
-
+     const response = await fetch(
+  `${process.env.NEXT_PUBLIC_API_URL}/loginvolunteer`,
+  {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Accept: "application/json",
+    },
+    body: JSON.stringify({
+      Email: email.trim(),
+      Password: password,
+    }),
+  }
+);
       console.log(
         "Login response status:",
         response.status

@@ -49,7 +49,7 @@ export default function Home() {
       setLoading(true);
 
       const response = await fetch(
-        "http://localhost:4000/send-otp",
+        `${process.env.NEXT_PUBLIC_API_URL}/send-otp`,
         {
           method: "POST",
           headers: {
@@ -117,7 +117,7 @@ export default function Home() {
       setLoading(true);
 
       const response = await fetch(
-        "http://localhost:4000/verify-otp",
+        `${process.env.NEXT_PUBLIC_API_URL}/verify-otp`,
         {
           method: "POST",
           headers: {

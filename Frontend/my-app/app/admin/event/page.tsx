@@ -276,11 +276,11 @@ export default function EventsAdmin() {
 
       console.log(
         "Uploading image to:",
-        `${API_URL}/api/events/upload-image`
+        `${process.env.NEXT_PUBLIC_API_URL}/api/events/upload-image`
       );
 
       const response = await fetch(
-        `${API_URL}/api/events/upload-image`,
+        `${process.env.NEXT_PUBLIC_API_URL}/api/events/upload-image`,
         {
           method: "POST",
           body: formData,
@@ -446,7 +446,7 @@ export default function EventsAdmin() {
       );
 
       const response = await fetch(
-        `${API_URL}/api/events`,
+        `${process.env.NEXT_PUBLIC_API_URL}/api/events`,
         {
           method: "POST",
 
@@ -539,7 +539,7 @@ export default function EventsAdmin() {
 
     try {
       const response = await fetch(
-        `${API_URL}/api/events/${id}`,
+        `${process.env.NEXT_PUBLIC_API_URL}/api/events/${id}`,
         {
           method: "DELETE",
 
@@ -593,7 +593,7 @@ export default function EventsAdmin() {
   ) => {
     try {
       const response = await fetch(
-        `${API_URL}/api/events/${id}/approve`,
+        `${process.env.NEXT_PUBLIC_API_URL}/api/events/${id}/approve`,
         {
           method: "PATCH",
 

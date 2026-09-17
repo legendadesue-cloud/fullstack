@@ -55,7 +55,7 @@ export default function Home() {
         setLoading(true);
         setError("");
 
-        const response = await fetch("http://localhost:4000/api/events");
+        const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/events`);
 
         if (!response.ok) {
           throw new Error("Failed to fetch events");

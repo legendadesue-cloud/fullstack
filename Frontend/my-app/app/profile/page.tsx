@@ -83,7 +83,7 @@ export default function Profile() {
       );
 
       const response = await fetch(
-        "http://localhost:4000/profile",
+        `${process.env.NEXT_PUBLIC_API_URL}/profile`,
         {
           method: "POST",
           headers: {
