@@ -113,7 +113,7 @@ export default function EventsAdmin() {
       setLoadingEvents(true);
 
       const response = await fetch(
-        `${API_URL}/api/events`,
+        `${process.env.NEXT_PUBLIC_API_URL}/api/events`,
         {
           method: "GET",
           headers: {
