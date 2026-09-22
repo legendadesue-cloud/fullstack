@@ -7634,3 +7634,420 @@ MOBILE BUTTONS
     font-size: 27px;
   }
 }
+
+/* =========================================
+   GLOBAL RESPONSIVE FIXES
+========================================= */
+
+img {
+  max-width: 100%;
+}
+
+button,
+input,
+select,
+textarea {
+  max-width: 100%;
+}
+
+body {
+  overflow-x: hidden;
+}
+
+
+/* =========================================
+   TABLET
+========================================= */
+
+@media (max-width: 1050px) {
+
+  header .navbar {
+    padding: 15px 25px;
+  }
+
+  header .menu-items {
+    gap: 15px;
+  }
+
+  header .menu-items a {
+    font-size: 14px;
+  }
+
+  header .search-box {
+    width: 180px;
+  }
+
+  .dashboard-section,
+  .dashboard-process-section,
+  .dashboard-impact-section,
+  .organizations-section,
+  .events-section {
+    padding-left: 6%;
+    padding-right: 6%;
+  }
+
+  .organization-grid,
+  .events-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .quick-access-grid,
+  .process-grid,
+  .gallery-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .organization-card,
+  .event-card,
+  .quick-card,
+  .process-card {
+    min-width: 0;
+  }
+
+}
+
+
+/* =========================================
+   MOBILE NAVBAR
+========================================= */
+
+@media (max-width: 800px) {
+
+  header .navbar {
+    padding: 13px 20px;
+    gap: 12px;
+  }
+
+  header .brandLogo img {
+    width: 45px;
+    height: 45px;
+  }
+
+  header .brandName p {
+    font-size: 1.2rem;
+  }
+
+  header .menu-items {
+    display: none;
+  }
+
+  header .search-bar {
+    display: none;
+  }
+
+  header .lucide-menu {
+    display: block;
+    margin-left: auto;
+    width: 28px;
+    height: 28px;
+  }
+
+}
+
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 600px) {
+
+  header .navbar {
+    padding: 12px 15px;
+  }
+
+  header .brandName {
+    gap: 7px;
+  }
+
+  header .brandLogo img {
+    width: 42px;
+    height: 42px;
+  }
+
+  header .brandName p {
+    font-size: 1.05rem;
+  }
+
+
+  /* HERO SECTIONS */
+
+  .volunteer-hero,
+  .organizations-hero,
+  .events-hero,
+  .profile-hero,
+  .admin-dashboard-hero {
+    padding: 45px 5%;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 25px;
+  }
+
+  .volunteer-hero h1,
+  .organizations-hero h1,
+  .events-hero h1,
+  .profile-hero h1,
+  .admin-dashboard-hero h1 {
+    font-size: clamp(32px, 10vw, 42px);
+    line-height: 1.1;
+  }
+
+  .volunteer-hero p,
+  .organizations-hero p,
+  .events-hero p,
+  .profile-hero p,
+  .admin-dashboard-hero p {
+    font-size: 14px;
+    line-height: 1.7;
+  }
+
+
+  /* SECTIONS */
+
+  .dashboard-section,
+  .dashboard-process-section,
+  .dashboard-impact-section,
+  .organizations-section,
+  .events-section,
+  .profile-section {
+    padding: 45px 5%;
+  }
+
+
+  /* GRIDS */
+
+  .quick-access-grid,
+  .process-grid,
+  .gallery-grid,
+  .organization-grid,
+  .events-grid,
+  .admin-stats-grid,
+  .management-grid {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+
+
+  /* CARDS */
+
+  .quick-card,
+  .process-card {
+    padding: 23px;
+  }
+
+  .organization-content,
+  .events-grid .event-content {
+    padding: 20px;
+  }
+
+  .dashboard-overview {
+    padding: 23px;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+
+  /* IMAGES */
+
+  .organization-image,
+  .event-image,
+  .events-grid img {
+    height: 200px;
+  }
+
+
+  /* SEARCH */
+
+  .organization-search {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .filter-box {
+    width: 100%;
+  }
+
+
+  /* BUTTONS */
+
+  .volunteer-hero-actions,
+  .events-hero-actions,
+  .admin-hero-actions,
+  .events-cta-actions,
+  .admin-cta-actions {
+    width: 100%;
+    flex-direction: column;
+  }
+
+  .volunteer-primary-btn,
+  .volunteer-secondary-btn,
+  .events-primary-btn,
+  .events-secondary-btn,
+  .admin-primary-btn,
+  .admin-secondary-btn,
+  .events-cta-primary,
+  .events-cta-secondary,
+  .admin-cta-primary,
+  .admin-cta-secondary {
+    width: 100%;
+    text-align: center;
+  }
+
+
+  /* CTA */
+
+  .organizations-cta,
+  .events-cta,
+  .admin-dashboard-cta {
+    margin-left: 5%;
+    margin-right: 5%;
+    padding: 40px 20px;
+  }
+
+  .organizations-cta h2,
+  .events-cta h2,
+  .admin-dashboard-cta h2 {
+    font-size: 28px;
+  }
+
+
+  /* EVENT BUTTONS */
+
+  .event-actions {
+    grid-template-columns: 1fr;
+  }
+
+  .event-view-btn,
+  .event-apply-btn,
+  .event-save-btn {
+    width: 100%;
+  }
+
+
+  /* ORGANIZATION INFO */
+
+  .organization-info {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .organization-info div:not(:last-child) {
+    border-right: none;
+    border-bottom: 1px solid #edf0ec;
+    padding-bottom: 12px;
+  }
+
+
+  /* LOGIN */
+
+  .login-section {
+    padding: 25px 15px;
+  }
+
+  .login-dashboard {
+    width: 100%;
+    padding: 30px 20px;
+    border-radius: 14px;
+  }
+
+  .login-header h1 {
+    font-size: 27px;
+  }
+
+  .form-group input {
+    font-size: 16px;
+  }
+
+
+  /* PROFILE */
+
+  .profile-dashboard {
+    padding: 25px 18px;
+  }
+
+  .profile-dashboard > h1 {
+    font-size: 34px;
+  }
+
+  .logged-in-user {
+    flex-direction: column;
+    gap: 7px;
+  }
+
+  .profile-details {
+    grid-template-columns: 1fr;
+  }
+
+}
+
+
+/* =========================================
+   SMALL PHONES
+========================================= */
+
+@media (max-width: 400px) {
+
+  header .brandLogo img {
+    width: 38px;
+    height: 38px;
+  }
+
+  header .brandName p {
+    font-size: 0.95rem;
+  }
+
+  .volunteer-hero,
+  .organizations-hero,
+  .events-hero,
+  .profile-hero,
+  .admin-dashboard-hero {
+    padding: 40px 4%;
+  }
+
+  .volunteer-hero h1,
+  .organizations-hero h1,
+  .events-hero h1,
+  .profile-hero h1,
+  .admin-dashboard-hero h1 {
+    font-size: 30px;
+  }
+
+  .dashboard-section,
+  .dashboard-process-section,
+  .dashboard-impact-section,
+  .organizations-section,
+  .events-section,
+  .profile-section {
+    padding-left: 4%;
+    padding-right: 4%;
+  }
+
+  .quick-card,
+  .process-card {
+    padding: 20px;
+  }
+
+  .organization-content,
+  .events-grid .event-content {
+    padding: 18px;
+  }
+
+  .organization-image,
+  .event-image,
+  .events-grid img {
+    height: 180px;
+  }
+
+  .login-dashboard {
+    padding: 25px 16px;
+  }
+
+  .login-header h1 {
+    font-size: 25px;
+  }
+
+  .otp-group input {
+    font-size: 19px;
+    letter-spacing: 5px;
+  }
+
+}
