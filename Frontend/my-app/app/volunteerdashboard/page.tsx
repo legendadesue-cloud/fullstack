@@ -114,7 +114,7 @@ export default function Home() {
               <span className="quick-arrow">→</span>
             </Link>
 
-            <Link href="#Events" className="quick-card">
+            <Link href="/events" className="quick-card">
               <div className="quick-icon">
                 <img
                   src="/images/icons8-timeline-50.png"
@@ -125,7 +125,8 @@ export default function Home() {
               <div>
                 <h3>Upcoming Events</h3>
                 <p>
-                  Explore available events and volunteer opportunities.
+                  Explore available events
+                   and volunteer opportunities.
                 </p>
               </div>
 
