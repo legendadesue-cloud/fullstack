@@ -8054,35 +8054,35 @@ body {
 
 .organization-page {
   min-height: 100vh;
-  background: #f4f7f5;
+  background: #f3f7f5;
   display: flex;
   justify-content: center;
   align-items: center;
   padding: 50px 20px;
 }
 
-.organization-container {
+.organization-card {
   width: 100%;
-  max-width: 850px;
+  max-width: 900px;
   background: #ffffff;
-  padding: 40px;
-  border-radius: 18px;
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+  padding: 45px 50px;
+  border-radius: 20px;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.08);
 }
 
 .organization-title {
-  text-align: center;
   color: #0c8b55;
-  font-size: 32px;
+  text-align: center;
+  font-size: 34px;
   font-weight: 700;
-  margin-bottom: 8px;
+  margin: 0;
 }
 
 .organization-subtitle {
+  color: #7b8580;
   text-align: center;
-  color: #777;
   font-size: 15px;
-  margin-bottom: 35px;
+  margin: 8px 0 35px;
 }
 
 .organization-form {
@@ -8091,108 +8091,158 @@ body {
   gap: 22px;
 }
 
-.organization-row {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 20px;
-}
-
-.organization-field {
+.organization-group {
   display: flex;
   flex-direction: column;
   gap: 8px;
 }
 
-.organization-field label {
-  font-size: 15px;
+.organization-group label {
+  color: #26332d;
+  font-size: 14px;
   font-weight: 600;
-  color: #333;
 }
 
-.organization-field input,
-.organization-field select,
-.organization-field textarea {
+.organization-group input,
+.organization-group select,
+.organization-group textarea {
   width: 100%;
-  padding: 13px 15px;
-  border: 1px solid #d6d6d6;
-  border-radius: 8px;
-  font-size: 15px;
-  outline: none;
-  transition: 0.2s ease;
   box-sizing: border-box;
+  padding: 13px 15px;
+  border: 1px solid #d6ded9;
+  border-radius: 10px;
+  background: #fafcfb;
+  color: #26332d;
+  font-size: 15px;
   font-family: inherit;
+  outline: none;
+  transition: all 0.2s ease;
 }
 
-.organization-field input:focus,
-.organization-field select:focus,
-.organization-field textarea:focus {
-  border-color: #0c8b55;
-  box-shadow: 0 0 0 3px rgba(12, 139, 85, 0.1);
+.organization-group input,
+.organization-group select {
+  height: 48px;
 }
 
-.organization-field textarea {
+.organization-group textarea {
+  min-height: 150px;
   resize: vertical;
-  min-height: 130px;
+  line-height: 1.5;
+}
+
+.organization-group input::placeholder,
+.organization-group textarea::placeholder {
+  color: #a4aca8;
+}
+
+.organization-group input:hover,
+.organization-group select:hover,
+.organization-group textarea:hover {
+  border-color: #9eafa6;
+}
+
+.organization-group input:focus,
+.organization-group select:focus,
+.organization-group textarea:focus {
+  border-color: #0c8b55;
+  background: #ffffff;
+  box-shadow: 0 0 0 3px rgba(12, 139, 85, 0.12);
+}
+
+.organization-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 25px;
 }
 
 .organization-button {
   width: 100%;
-  padding: 14px;
+  height: 50px;
   border: none;
-  border-radius: 8px;
+  border-radius: 10px;
   background: #0c8b55;
   color: white;
   font-size: 16px;
-  font-weight: 600;
+  font-weight: 700;
   cursor: pointer;
-  transition: 0.2s ease;
-  margin-top: 5px;
+  transition: all 0.2s ease;
 }
 
 .organization-button:hover {
   background: #087147;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 15px rgba(12, 139, 85, 0.2);
 }
 
 .organization-button:active {
-  transform: scale(0.99);
+  transform: translateY(0);
 }
 
-@media (max-width: 700px) {
+/* Tablet */
+@media (max-width: 768px) {
   .organization-page {
-    padding: 30px 15px;
+    padding: 35px 15px;
   }
 
-  .organization-container {
-    padding: 25px 20px;
+  .organization-card {
+    padding: 35px 30px;
   }
 
   .organization-title {
-    font-size: 26px;
+    font-size: 29px;
+  }
+}
+
+/* Mobile */
+@media (max-width: 600px) {
+  .organization-page {
+    padding: 20px 12px;
+    align-items: flex-start;
+  }
+
+  .organization-card {
+    margin-top: 20px;
+    padding: 28px 20px;
+    border-radius: 16px;
+  }
+
+  .organization-title {
+    font-size: 25px;
+    line-height: 1.25;
+  }
+
+  .organization-subtitle {
+    font-size: 14px;
+    margin-bottom: 28px;
   }
 
   .organization-row {
     grid-template-columns: 1fr;
     gap: 22px;
   }
+
+  .organization-group input,
+  .organization-group select {
+    height: 46px;
+  }
+
+  .organization-group textarea {
+    min-height: 130px;
+  }
+
+  .organization-button {
+    height: 48px;
+    font-size: 15px;
+  }
 }
 
-@media (max-width: 450px) {
-  .organization-container {
-    padding: 22px 15px;
-    border-radius: 12px;
+/* Small phones */
+@media (max-width: 400px) {
+  .organization-card {
+    padding: 25px 15px;
   }
 
   .organization-title {
-    font-size: 23px;
-  }
-
-  .organization-subtitle {
-    font-size: 14px;
-  }
-
-  .organization-field input,
-  .organization-field select,
-  .organization-field textarea {
-    font-size: 14px;
+    font-size: 22px;
   }
 }
