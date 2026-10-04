@@ -58,7 +58,7 @@ export default function Home() {
           </button>
 
           <button className="login-button">
-            <a href="/profile">
+            <a href="/orgprofile">
               Haven't registered your organization? Register now
             </a>
           </button>

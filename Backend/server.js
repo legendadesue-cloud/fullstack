@@ -485,7 +485,109 @@ app.post("/verify-otp", async (req, res) => {
       details: error.message,
     });
   }
-});// ========================================
+});
+
+app.post("/profile", async (req, res) => {
+  try {
+    const {
+      organizationName,
+      email,
+      phone,
+      location,
+      website,
+      organizationType,
+      description,
+      areasOfInterest,
+    } = req.body;
+
+    if (!organizationName || !email || !location || !organizationType) {
+      return res.status(400).json({
+        success: false,
+        error: "Please fill in all required fields",
+      });
+    }
+
+    const result = await pool.query(
+      `INSERT INTO organizations
+      ("OrganizationName", "Email", "Phone", "Location", "Website",
+       "OrganizationType", "Description", "AreasOfInterest")
+       VALUES ($1,$2,$3,$4,$5,$6,$7,$8)
+       RETURNING *`,
+      [
+        organizationName,
+        email,
+        phone,
+        location,
+        website,
+        organizationType,
+        description,
+        areasOfInterest,
+      ]
+    );
+
+    const organization = result.rows[0];
+
+    await resend.emails.send({
+      from: process.env.EMAIL_FROM,
+      to: email,
+      subject: "Organization Profile Created Successfully",
+      html: `
+        <div style="font-family: Arial, sans-serif; padding: 20px;">
+          <h2 style="color: #0c8b55;">
+            Welcome to ARMSLENGTH!
+          </h2>
+
+          <p>Hello <strong>${organizationName}</strong>,</p>
+
+          <p>
+            Your organization profile has been successfully created on
+            ARMSLENGTH.
+          </p>
+
+          <p>
+            You can now use ARMSLENGTH to create opportunities and connect
+            with volunteers. YOUR PASSCODE IS: <strong>ARM2026</strong>
+          </p>
+
+          <h3>Organization Details</h3>
+
+          <p>
+            <strong>Organization:</strong> ${organizationName}<br>
+            <strong>Email:</strong> ${email}<br>
+            <strong>Location:</strong> ${location}<br>
+            <strong>Type:</strong> ${organizationType}
+          </p>
+
+          <p>
+            Thank you for joining ARMSLENGTH.
+          </p>
+
+          <p>
+            <strong>ARMSLENGTH</strong><br>
+            EVERY DESERVES A CHANCE TOGETHER.
+          </p>
+        </div>
+      `,
+    });
+
+    res.status(201).json({
+      success: true,
+      message: "Organization profile created and confirmation email sent",
+      organization,
+    });
+
+  } catch (error) {
+    console.error(error);
+
+    res.status(500).json({
+      success: false,
+      error: "Failed to create organization profile",
+      details: error.message,
+    });
+  }
+});
+
+// ========================================
 // GET ALL EVENTS
 // ========================================
 
