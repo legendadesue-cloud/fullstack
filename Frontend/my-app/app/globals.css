@@ -8051,3 +8051,148 @@ body {
   }
 
 }
+
+.organization-page {
+  min-height: 100vh;
+  background: #f4f7f5;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 50px 20px;
+}
+
+.organization-container {
+  width: 100%;
+  max-width: 850px;
+  background: #ffffff;
+  padding: 40px;
+  border-radius: 18px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+}
+
+.organization-title {
+  text-align: center;
+  color: #0c8b55;
+  font-size: 32px;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.organization-subtitle {
+  text-align: center;
+  color: #777;
+  font-size: 15px;
+  margin-bottom: 35px;
+}
+
+.organization-form {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+
+.organization-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.organization-field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.organization-field label {
+  font-size: 15px;
+  font-weight: 600;
+  color: #333;
+}
+
+.organization-field input,
+.organization-field select,
+.organization-field textarea {
+  width: 100%;
+  padding: 13px 15px;
+  border: 1px solid #d6d6d6;
+  border-radius: 8px;
+  font-size: 15px;
+  outline: none;
+  transition: 0.2s ease;
+  box-sizing: border-box;
+  font-family: inherit;
+}
+
+.organization-field input:focus,
+.organization-field select:focus,
+.organization-field textarea:focus {
+  border-color: #0c8b55;
+  box-shadow: 0 0 0 3px rgba(12, 139, 85, 0.1);
+}
+
+.organization-field textarea {
+  resize: vertical;
+  min-height: 130px;
+}
+
+.organization-button {
+  width: 100%;
+  padding: 14px;
+  border: none;
+  border-radius: 8px;
+  background: #0c8b55;
+  color: white;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.2s ease;
+  margin-top: 5px;
+}
+
+.organization-button:hover {
+  background: #087147;
+}
+
+.organization-button:active {
+  transform: scale(0.99);
+}
+
+@media (max-width: 700px) {
+  .organization-page {
+    padding: 30px 15px;
+  }
+
+  .organization-container {
+    padding: 25px 20px;
+  }
+
+  .organization-title {
+    font-size: 26px;
+  }
+
+  .organization-row {
+    grid-template-columns: 1fr;
+    gap: 22px;
+  }
+}
+
+@media (max-width: 450px) {
+  .organization-container {
+    padding: 22px 15px;
+    border-radius: 12px;
+  }
+
+  .organization-title {
+    font-size: 23px;
+  }
+
+  .organization-subtitle {
+    font-size: 14px;
+  }
+
+  .organization-field input,
+  .organization-field select,
+  .organization-field textarea {
+    font-size: 14px;
+  }
+}
