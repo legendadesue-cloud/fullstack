@@ -487,7 +487,7 @@ app.post("/verify-otp", async (req, res) => {
   }
 });
 
-app.post("/profile", async (req, res) => {
+app.post("/organization/profile", async (req, res) => {
   try {
     const {
       organizationName,
