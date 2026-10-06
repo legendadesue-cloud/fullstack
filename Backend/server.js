@@ -999,9 +999,18 @@ app.delete("/api/events/:id", async (req, res) => {
   }
 });
 
+
 app.post("/api/events/:id/register", async (req, res) => {
   try {
     const { id } = req.params;
+    const { volunteer_id } = req.body;
+
+    if (!volunteer_id) {
+      return res.status(400).json({
+        success: false,
+        error: "Volunteer ID is required",
+      });
+    }
 
     const eventResult = await pool.query(
       `SELECT id, name, capacity, volunteers, registration_deadline, status
@@ -1046,6 +1055,29 @@ app.post("/api/events/:id/register", async (req, res) => {
       });
     }
 
+    const existingRegistration = await pool.query(
+      `SELECT id
+       FROM event_registrations
+       WHERE event_id = $1 AND volunteer_id = $2`,
+      [id, volunteer_id]
+    );
+
+    if (existingRegistration.rows.length > 0) {
+      return res.status(400).json({
+        success: false,
+        error: "Already registered",
+        details: "You have already registered for this event.",
+      });
+    }
+
+    const registration = await pool.query(
+      `INSERT INTO event_registrations
+       (event_id, volunteer_id)
+       VALUES ($1, $2)
+       RETURNING *`,
+      [id, volunteer_id]
+    );
+
     const updatedEvent = await pool.query(
       `UPDATE events
        SET volunteers = COALESCE(volunteers, 0) + 1
@@ -1057,10 +1089,19 @@ app.post("/api/events/:id/register", async (req, res) => {
     res.json({
       success: true,
       message: "Successfully registered for the event",
+      registration: registration.rows[0],
       event: updatedEvent.rows[0],
     });
   } catch (error) {
     console.error("Registration error:", error);
+
+    if (error.code === "23505") {
+      return res.status(400).json({
+        success: false,
+        error: "Already registered",
+        details: "You have already registered for this event.",
+      });
+    }
 
     res.status(500).json({
       success: false,
@@ -1069,6 +1110,7 @@ app.post("/api/events/:id/register", async (req, res) => {
     });
   }
 });
+
 // ========================================
 // CREATE PROFILE
 // ========================================
