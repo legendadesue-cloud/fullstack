@@ -55,6 +55,8 @@ pool.connect()
   .catch((error) => {
     console.error("PostgreSQL connection error:", error);
   });
+  console.log("NODE_ENV:", process.env.NODE_ENV);
+console.log("DATABASE_URL exists:", !!process.env.DATABASE_URL);
 
 // ========================================
 // CLOUDINARY
